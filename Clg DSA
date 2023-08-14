@@ -1,4 +1,5 @@
-
+14.08.23(Monday)
+(need to convert it to switch)
 #include<stdio.h>
 
 void *swap(int *a, int *b)
