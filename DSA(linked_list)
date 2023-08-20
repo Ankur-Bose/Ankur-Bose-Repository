@@ -1,0 +1,280 @@
+//linked list traversal
+#include<stdio.h>
+#include<stdlib.h>
+struct Node {
+    int data;
+    struct Node* next;
+};
+
+void linkedlistTraversal(struct Node* ptr) 
+{
+    while(ptr != NULL)
+    {
+    printf("Element : %d\n", ptr->data);
+    ptr = ptr->next;
+    }
+}
+int main()
+{
+    struct Node* head;
+    struct Node* second;
+    struct Node* third;
+    struct Node* fourth;
+    
+
+    //Allocate memory in heap
+    head = (struct Node*)malloc(sizeof(struct Node));
+    second = (struct Node*)malloc(sizeof(struct Node));
+    third = (struct Node*)malloc(sizeof(struct Node));
+    fourth = (struct Node*)malloc(sizeof(struct Node));
+    //Link first and second node
+    head->data = 7;
+    head->next = second;
+    //Link second and third node
+    second->data = 11;
+    second->next = third;
+    //Link third t fourth the list 
+    third->data = 21;
+    third->next = fourth;
+    //Link fourth to Terminate
+    fourth->data = 44;
+    fourth->next = NULL;
+
+    //Calling traversal function
+    linkedlistTraversal(head);
+return 0 ; 
+}
+
+
+
+
+//linked list insertion
+#include<stdio.h>
+#include<stdlib.h>
+//creation of Linked List
+struct Node
+{
+    int data;
+    struct Node* next;
+};
+
+//Function to Traverse through the list
+void traverse(struct Node* ptr)
+{
+    while(ptr!=NULL)
+    {
+        printf("Element %d\n",ptr->data);
+        ptr = ptr->next;
+    }
+}
+//Insertion at first
+struct Node* insertAtFirst(struct Node* head, int data)
+{
+    struct Node* ptr = (struct Node*)malloc(sizeof(struct Node));
+    ptr->next = head;
+    ptr->data = data;
+    return ptr;
+}
+
+//insertion at between
+struct Node* insertatBetween(struct Node* head, int data, int index)
+{
+    struct Node* ptr = (struct Node*)malloc(sizeof(struct Node));
+    struct  Node* p = head;
+    int i=0;
+    while(i!=index-1)  //condtiton to move the p
+    {
+        p=p->next;
+        i++;
+    }
+    ptr->data = data;
+    ptr->next = p->next;
+    p->next = ptr;
+    return head;
+}
+
+//insert at the end
+struct Node* insertatEnd(struct Node* head, int data)
+{
+    struct Node* ptr = (struct Node*)malloc(sizeof(struct Node));
+    struct Node* p = head;
+    p->data = data;
+    while(p->next != NULL)
+    {
+        p = p->next;
+    }
+    p->next = ptr;
+    ptr->next = NULL;
+    return head;
+}
+
+//insert after a node
+struct Node* insertafterNode(struct Node* head,struct Node* previousNode, int data)
+{
+    struct Node* ptr = (struct Node*)malloc(sizeof(struct Node));
+    ptr->data = data;
+    ptr->next = previousNode->next;
+    previousNode->next = ptr;
+    return head;
+}
+
+int main()
+{
+    struct Node* head;
+    struct Node* second;
+    struct Node* third;
+    struct Node* fourth;
+
+    //Allocate memory in heap
+    head = (struct Node*)malloc(sizeof(struct Node));
+    second = (struct Node*)malloc(sizeof(struct Node));
+    third = (struct Node*)malloc (sizeof(struct Node));
+    fourth = (struct Node*)malloc (sizeof(struct Node));
+
+    //value adding first to second
+    head->data = 7;
+    head->next = second;
+    //value adding second to third
+    second->data = 11;
+    second->next = third;
+    //value adding third to fourth
+    third->data = 44;
+    third->next = fourth;
+    //value for fourth to NULL
+    fourth->data = 41;
+    fourth->next = NULL;
+    printf("The original list\n");
+    traverse(head);
+    head = insertAtFirst(head,56);
+    printf("The inserted list is \n");
+    traverse(head);
+    printf("Insert at between\n");
+    insertatBetween(head,56,1);
+    traverse(head);
+    printf("Insert at the end \n");
+    insertatEnd(head,22);
+    traverse(head);
+    head= insertafterNode(head, second, 45);
+    traverse(head);
+return 0; 
+}
+
+
+
+
+
+
+
+
+//linked list deletion
+#include<stdio.h>
+#include<stdlib.h>
+struct Node {
+    int data;
+    struct Node* next;
+};
+
+void traverse(struct Node* ptr)
+{
+    while(ptr!=NULL)
+    {
+        printf("Element :%d\n",ptr->data);
+        ptr = ptr->next;
+    }
+}
+// Case 1 : Delete node at first 
+struct Node* deleteAtFirst(struct Node* head)
+{
+    struct Node* ptr = head;
+    head= head->next;
+    free(ptr);
+
+    return head;
+}
+
+//Case 2 : Delete a node in between
+struct Node* deleteAtIndex(struct Node* head, int index)
+{
+    struct Node* p = head;
+    struct Node* q = head->next;
+    for(int i=0;i<index-1;i++)
+    {
+        p = p->next;
+        q = q->next;
+    }
+    
+    p->next = q->next;
+    free(q);
+
+    return head;
+}
+
+//case 3: delete the last element
+struct Node* deleteLastNode(struct Node* head)
+{
+    struct Node* p = head;
+    struct Node* q = head->next;
+    while(q->next!=NULL)
+    {
+        p = p->next;
+        q = q->next;
+    }
+    p->next = NULL;
+    free(q);
+
+    return head;
+}
+
+//case 4: Delete a node with e given value / index
+struct Node* deleteNodeGivenValue(struct Node* head , int index)
+{
+    struct Node* p = head;
+    struct Node* q = head->next;
+    while(q->data!=index && q->data!=NULL)
+    {
+        p = p->next;
+        q = q->next;
+    }
+    if(q->data == index)
+    {
+    p->next = q->next;
+    free(q);
+    }
+    return head;
+}
+int main()
+{
+    struct Node* head;
+    struct Node* second;
+    struct Node* third;
+    struct Node* fourth;
+
+    //memory alocation dynamically
+    head = (struct Node*)malloc(sizeof(struct Node));
+    second = (struct Node*)malloc(sizeof(struct Node));
+    third = (struct Node*)malloc(sizeof(struct Node));
+    fourth = (struct Node*)malloc(sizeof(struct Node));
+    
+    head->data = 5;
+    head->next = second;
+
+    second->data = 10;
+    second->next = third;
+
+    third->data = 15;
+    third->next = fourth;
+
+    fourth->data = 20;
+    fourth->next = NULL;
+    
+    printf("The list is \n");
+    traverse(head);
+    //head = deleteAtFirst(head);  //case 1:
+    //head = deleteAtIndex(head,2);//case 2:
+    //head = deleteLastNode(head);    //case 3:
+    head = deleteNodeGivenValue(head,15);
+    printf("The updated list\n"); 
+    traverse(head);
+
+return 0 ; 
+}
