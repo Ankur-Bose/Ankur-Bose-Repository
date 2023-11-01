@@ -133,3 +133,87 @@ int main()
 	display(arr,n);
 	return 0;
 }
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+#include<stdio.h>
+#define table_size 10
+
+int hash1(int key)
+{
+	return key%table_size;
+}
+
+/*int hash2(int key)
+{
+	return (key*2+1)%table_size;
+}*/
+
+int main()
+{
+	printf("Hlo");
+	int arr[]={72,27,30,24,63,81,34};
+	int hash_table[table_size]={0};
+	int check=0;
+	//static int hash_table[table_size];
+	for(int i=0;i<10;i++)
+	{
+		int index1=hash1(arr[i]);
+		hash_table[index1]=arr[i];
+		//int index2=hash2(arr[i]);
+		//hash_table[index2]=arr[i];
+		}
+		//int index2=hash2(arr[i]);
+		/*if(hash_table[index1]!=0)
+		{
+			index1=(arr[i])%table_size;
+		}
+		hash_table[index1]=arr[i];
+		/*if(hash_table[index2]!=0)
+		{
+			index2=(arr[i])%table_size;
+		}
+		hash_table[index2]=arr[i];
+	}*/
+	printf("Hash Table \n");
+	for(int i=0;i<10;i++)
+	{
+		if(hash_table[i]==81)
+		check=1;
+		printf("%d: %d\n",i,hash_table[i]);
+	}
+	if(check==1)
+	printf("Present ");
+	else
+	printf("Not present ");
+	return 0;
+}
